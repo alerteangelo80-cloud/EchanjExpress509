@@ -285,6 +285,43 @@ function changeLang() {
 
 }
 
+function startExchange() {
+
+  let amount = Number(document.getElementById("amount").value);
+  let phone = document.getElementById("phone").value;
+  let direction = document.getElementById("direction").value;
+
+  if (amount < 50 || amount > 10000) {
+    alert("Kantite lajan an dwe ant 50 HTG ak 10 000 HTG.");
+    return;
+  }
+
+  if (phone.length < 8) {
+    alert("Tanpri antre nimewo telefòn ou.");
+    return;
+  }
+
+  let fee = amount * 0.075;
+  let receive = amount - fee;
+
+  let exchangeType = direction === "MN"
+    ? "MonCash pou Natcash"
+    : "Natcash pou MonCash";
+
+  let message =
+    "Bonjou EchanjExpress509,%0A%0A" +
+    "Mwen vle fè yon echanj.%0A" +
+    "Kalite echanj: " + exchangeType + "%0A" +
+    "Kantite mwen voye: " + amount + " HTG%0A" +
+    "Frè sèvis 7.5%: " + fee.toFixed(2) + " HTG%0A" +
+    "Kantite mwen resevwa: " + receive.toFixed(2) + " HTG%0A" +
+    "Nimewo telefòn mwen: " + phone;
+
+  window.open(
+    "https://wa.me/50934536541?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+}
 </script>
 
 <section style="background:#092c4c;color:white;padding:25px;text-align:center;border-radius:12px;margin:20px;">
