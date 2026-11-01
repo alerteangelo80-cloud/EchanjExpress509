@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EchanjExpress509</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #172033;
+}
+
+header {
+  background: #092c4c;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 25px;
+}
+
+header p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.lang {
+  margin-top: 12px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+main {
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px #00000010;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #092c4c;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+select, input {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  border: 1px solid #ccd5df;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.result {
+  background: #e8f5ed;
+  padding: 18px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.result p {
+  margin: 8px 0;
+}
+
+.amount {
+  color: #087443;
+  font-size: 27px;
+  font-weight: bold;
+}
+
+button.exchange {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  background: #087443;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.exchange:hover {
+  background: #065b35;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #667085;
+  font-size: 13px;
+}
+
+.notice {
+  font-size: 12px;
+  color: #667085;
+  margin-top: 15px;
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>EchanjExpress509</h1>
+  <p id="subtitle">Echanje lajan ou rapid, fasil ak an sekirite</p>
+  <button class="lang" onclick="changeLang()">Français / Kreyòl</button>
+</header>
+
+<main>
+  <div class="card">
+
+    <h2 id="title">Fè yon echanj</h2>
+
+    <label id="directionLabel">Kalite echanj</label>
+
+    <select id="direction" onchange="calculate()">
+      <option value="MN">MonCash → Natcash</option>
+      <option value="NM">Natcash → MonCash</option>
+    </select>
+
+    <label id="amountLabel">Kantite lajan (HTG)</label>
+
+    <input
+      type="number"
+      id="amount"
+      placeholder="Antre kantite lajan an"
+      min="50"
+      max="10000"
+      oninput="calculate()"
+    >
+
+    <div class="result">
+
+      <p id="feeLabel">Frè sèvis (7.5%)</p>
+      <p id="fee">0.00 HTG</p>
+
+      <p id="receiveLabel">Kantite ou resevwa</p>
+      <p class="amount" id="receive">0.00 HTG</p>
+
+    </div>
+
+    <label id="phoneLabel">Nimewo telefòn ou</label>
+
+    <input
+      type="tel"
+      id="phone"
+      placeholder="Egzanp: 509XXXXXXXX"
+    >
+
+    <button class="exchange" onclick="startExchange()" id="button">
+      Kòmanse echanj
+    </button>
+
+    <p class="notice" id="notice">
+      Frè sèvis la se 7.5%. Minimòm 50 HTG.
+      Maksimòm 10 000 HTG.
+    </p>
+
+  </div>
+</main>
+
+<footer>
+  © 2026 EchanjExpress509
+  <br><br>
+  MonCash ↔ Natcash
+</footer>
+
+<script>
+
+let lang = "ht";
+
+function calculate() {
+
+  let amount = Number(document.getElementById("amount").value);
+
+  let fee = amount * 0.075;
+
+  let receive = amount - fee;
+
+  document.getElementById("fee").textContent =
+    fee.toFixed(2) + " HTG";
+
+  document.getElementById("receive").textContent =
+    receive.toFixed(2) + " HTG";
+
+}
+
+function startExchange() {
+
+  let amount = Number(document.getElementById("amount").value);
+
+  let phone = document.getElementById("phone").value;
+
+  if (amount < 50 || amount > 10000) {
+
+    alert(lang === "ht"
+      ? "Kantite lajan an dwe ant 50 HTG ak 10 000 HTG."
+      : "Le montant doit être entre 50 HTG et 10 000 HTG.");
+
+    return;
+
+  }
+
+  if (phone.length < 8) {
+
+    alert(lang === "ht"
+      ? "Tanpri antre yon nimewo telefòn ki valid."
+      : "Veuillez entrer un numéro de téléphone valide.");
+
+    return;
+
+  }
+
+  alert(lang === "ht"
+    ? "Byenveni sou EchanjExpress509! Sistèm peman an poko aktive. Tanpri tann pwochen etap la."
+    : "Bienvenue sur EchanjExpress509! Le système de paiement n'est pas encore activé.");
+
+}
+
+function changeLang() {
+
+  lang = lang === "ht" ? "fr" : "ht";
+
+  document.getElementById("subtitle").textContent =
+    lang === "ht"
+    ? "Echanje lajan ou rapid, fasil ak an sekirite"
+    : "Échangez votre argent rapidement et en toute sécurité";
+
+  document.getElementById("title").textContent =
+    lang === "ht" ? "Fè yon echanj" : "Faire un échange";
+
+  document.getElementById("directionLabel").textContent =
+    lang === "ht" ? "Kalite echanj" : "Type d'échange";
+
+  document.getElementById("amountLabel").textContent =
+    lang === "ht" ? "Kantite lajan (HTG)" : "Montant (HTG)";
+
+  document.getElementById("feeLabel").textContent =
+    lang === "ht" ? "Frè sèvis (7.5%)" : "Frais de service (7.5%)";
+
+  document.getElementById("receiveLabel").textContent =
+    lang === "ht" ? "Kantite ou resevwa" : "Montant à recevoir";
+
+  document.getElementById("phoneLabel").textContent =
+    lang === "ht" ? "Nimewo telefòn ou" : "Votre numéro de téléphone";
+
+  document.getElementById("button").textContent =
+    lang === "ht" ? "Kòmanse echanj" : "Commencer l'échange";
+
+  document.getElementById("notice").textContent =
+    lang === "ht"
+    ? "Frè sèvis la se 7.5%. Minimòm 50 HTG. Maksimòm 10 000 HTG."
+    : "Frais de service de 7.5%. Minimum 50 HTG. Maximum 10 000 HTG.";
+
+}
+
+</script>
+
+</body>
+  </html>
